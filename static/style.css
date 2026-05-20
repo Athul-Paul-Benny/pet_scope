@@ -1,0 +1,255 @@
+/* 🌌 BODY */
+body::selection{
+    background-color:aquamarine;
+    color:black;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #eaeaf0;
+    background: #0f0f1a;
+
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* PAGE LAYOUT */
+.page {
+    display: flex;
+    min-height: 100vh;
+
+    /* smooth blend instead of line */
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        #0f0f1a 65%
+    );
+}
+
+/* 🐶 LEFT IMAGE */
+.left-image {
+    width: 55%;
+    position: relative;
+    overflow: visible;
+}
+
+/* DOG IMAGE */
+.left-image img {
+    height: 110vh; /* 🔥 fixes bottom cutoff */
+    width: auto;
+
+    position: absolute;
+    left: -180px; /* 🔥 slight crop from left */
+    bottom: -20px; /* 🔥 brings lower part into view */
+
+    transform: scale(1.1);
+    object-fit: cover;
+
+    filter: brightness(0.95) contrast(1.1);
+}
+
+/* soft glow behind dog */
+.left-image::before {
+    content: "";
+    position: absolute;
+    left: 20%;
+    top: 30%;
+    width: 400px;
+    height: 400px;
+
+    background: radial-gradient(circle, rgba(255,110,196,0.15), transparent);
+    filter: blur(100px);
+}
+
+/* RIGHT SIDE */
+.right-content {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    justify-content: center; /* 🔥 vertical center */
+    padding-right: 80px; /* 🔥 pulls UI inward */
+}
+
+/* TITLE */
+.title {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    margin-top: 30px;
+
+    background: linear-gradient(90deg, #ff6ec4, #7873f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 25px rgba(255,110,196,0.3);
+}
+
+/* CARD */
+.container {
+    width: 400px;
+    margin-top: 20px;
+
+    transform: translateX(-40px); /* 🔥 shift toward center */
+
+    padding: 30px;
+    border-radius: 20px;
+
+    background: rgba(20, 20, 35, 0.6);
+    backdrop-filter: blur(30px);
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* TEXT */
+.subtitle {
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* UPLOAD BOX */
+.upload-box {
+    border: 2px dashed rgba(255,255,255,0.5);
+    padding: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* PREVIEW */
+#preview {
+    margin-top: 15px;
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    display: none;
+}
+
+/* BUTTON */
+button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+
+    background: linear-gradient(90deg, #ff6ec4, #7873f5);
+    color: white;
+    font-size: 16px;
+
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(255,110,196,0.4);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,110,196,0.7);
+}
+
+/* RESULT */
+#results {
+    margin-top: 20px;
+}
+
+.result-card {
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* LOADER */
+.loader {
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 900px) {
+    .page {
+        flex-direction: column;
+    }
+
+    .left-image {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .left-image img {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        transform: none;
+    }
+
+    .right-content {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .container {
+        transform: none;
+    }
+}
+
+/* 🐾 PAW BACKGROUND LAYER */
+
+.main-container,
+.card,
+.predictor {
+    position: relative;
+    z-index: 1;
+}
+/* 🐾 CLEAN PAW BACKGROUND */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white'%3E%3Cellipse cx='32' cy='40' rx='10' ry='8'/%3E%3Cellipse cx='20' cy='22' rx='4' ry='6'/%3E%3Cellipse cx='44' cy='22' rx='4' ry='6'/%3E%3Cellipse cx='26' cy='14' rx='3.5' ry='5'/%3E%3Cellipse cx='38' cy='14' rx='3.5' ry='5'/%3E%3C/g%3E%3C/svg%3E");
+
+    background-size: 150px;
+    background-repeat: repeat;
+
+    opacity: 0.1;
+
+    transform: rotate(-10deg);
+}
+
+/* second layer for randomness */
+/*body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white'%3E%3Cellipse cx='32' cy='40' rx='9' ry='7'/%3E%3Cellipse cx='20' cy='22' rx='3.5' ry='5'/%3E%3Cellipse cx='44' cy='22' rx='3.5' ry='5'/%3E%3Cellipse cx='26' cy='14' rx='3' ry='4.5'/%3E%3Cellipse cx='38' cy='14' rx='3' ry='4.5'/%3E%3C/g%3E%3C/svg%3E");
+
+    background-size: 90px;
+    background-repeat: repeat;
+
+    opacity: 0.035;
+
+    transform: rotate(25deg);
+}*/
